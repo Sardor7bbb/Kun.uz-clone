@@ -42,8 +42,6 @@ INSTALLED_APPS = [
 
     'homepage',
     'news',
-
-
 ]
 
 MIDDLEWARE = [

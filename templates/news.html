@@ -5,6 +5,10 @@
     <title>News List</title>
 </head>
 <body>
-<h1> scds </h1>
+{% for i in news %}
+    <a href="{% url 'detail' i.pk %}"><h2> {{ forloop.counter}}) {{ i.title | slice:":30"}}... </h2></a>
+{% endfor %}
+<button><a href="{% url 'home' %}"> Home </a></button>
+
 </body>
 </html>
