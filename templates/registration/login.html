@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+<h1>Login Page</h1>
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {% for i in form %}
+            <tr>
+                <td>{{ i.label_tag }}</td>
+                <td>{{ i }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p>
+        <input type="submit" value="Login">
+    </p>
+</form>
+
+</body>
+</html>
+{% endblock %}
