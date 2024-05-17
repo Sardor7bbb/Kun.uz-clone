@@ -2,41 +2,112 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Detail </title>
+    <title>Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #1976d2; /* Link color */
+        }
+        button {
+            margin-bottom: 20px;
+            background-color: #1976d2; /* Button background color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1565c0; /* Button hover color */
+        }
+        h2 {
+            color: #1976d2; /* Header color */
+        }
+        .detail-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        input[type="submit"] {
+            background-color: #1976d2; /* Button background color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #1565c0; /* Button hover color */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        small {
+            color: #6c757d; /* Muted text color */
+        }
+    </style>
 </head>
 <body>
-<button><a href="{% url 'home' %}">Home</a></button>
 
-    <div>
-        <h2>{{ news.title }}</h2>
-         <p>Date: {{ news.set_data }}</p>
-        <img src="{{ news.image.url }}" alt="{{ news.title }}">
-        <p>{{ news.info }}</p>
+<button><a href="{% url 'home' %}" style="color: white; text-decoration: none;">Home</a></button>
 
-        <a href="{{ news.link }}">Read more</a><br><br>
-
-    </div>
-
+<div class="detail-container">
+    <h2>{{ news.title }}</h2>
+    <p>Date: {{ news.set_data }}</p> <!-- Corrected date field -->
+    <img src="{{ news.image.url }}" alt="{{ news.title }}">
+    <p>{{ news.info }}</p>
+    <a href="{{ news.link }}">Read more</a>
+</div>
 
 <form method="post">
     {% csrf_token %}
-    <textarea rows="4" name="comment"></textarea>
+    <textarea rows="4" name="comment" placeholder="Write your comment here..."></textarea><br>
     <input type="submit" value="Post Comment">
 </form>
+
 <h2>Comments</h2>
 
 {% if news.comments.all %}
     <ul>
-        {% for i in news.comments.all %}
+        {% for comment in news.comments.all %}
             <li>
-                {{ i.user.username }}<br>
-                    {{ i.text }}...<br>
-                <small>{{ i.created_at }}</small>
+                <strong>{{ comment.user.username }}</strong><br>
+                {{ comment.text }}<br>
+                <small>{{ comment.created_at }}</small>
             </li>
         {% endfor %}
     </ul>
 {% else %}
-<p>No comments</p>
+    <p>No comments yet.</p>
 {% endif %}
 
 </body>
