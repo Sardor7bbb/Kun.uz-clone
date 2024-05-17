@@ -1,9 +1,8 @@
-
+# Create your views here.
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from django.contrib import messages
-# Create your views here.
 
 
 def sign_up(request):
@@ -22,3 +21,5 @@ def sign_up(request):
             return redirect('home')
         else:
             return render(request, 'registration/register.html', {'form': form})
+
+
